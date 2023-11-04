@@ -1,4 +1,4 @@
-   const mobile={
+const mobile = {
     "messages": [
         {
             "name": "ms.entity.products.list",

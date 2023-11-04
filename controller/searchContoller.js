@@ -1,4 +1,6 @@
+const laptop = require('../constants/electronicsProduct/laptopProduct.js')
 const searchByProduct = async (req, res) => {
+    console.log(laptop);
     // let info = {
     //     firstName: req.body.firstName,
     //     lastName: req.body.lastName,
@@ -8,8 +10,9 @@ const searchByProduct = async (req, res) => {
     // }
 
     const data = req.params.product;
-   
 
+   
+    res.send(laptop)
     // try {
     //     let data = await User.create(info)
     //     // res.status(200).json(data);
@@ -35,7 +38,6 @@ const searchByProduct = async (req, res) => {
 const searchByCategory = async (req, res) => {
     const data = req.body;
     console.log(data);
-
 }
 
 module.exports = {
