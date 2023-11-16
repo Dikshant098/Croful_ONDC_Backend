@@ -34942,3 +34942,5 @@ const burger4= {
         "count": 20
     }
 }
+
+module.exports = burger1

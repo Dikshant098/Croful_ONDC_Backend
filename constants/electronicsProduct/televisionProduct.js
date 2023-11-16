@@ -5986,3 +5986,5 @@ const television = {
         "total": 316
     }
 }
+
+module.exports = television

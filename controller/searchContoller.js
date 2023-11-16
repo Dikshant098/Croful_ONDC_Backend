@@ -1,40 +1,47 @@
 const laptop = require('../constants/electronicsProduct/laptopProduct.js')
-const searchByProduct = async (req, res) => {
-    console.log(laptop);
-    // let info = {
-    //     firstName: req.body.firstName,
-    //     lastName: req.body.lastName,
-    //     phone: req.body.phone,
-    //     email: req.body.email,
-    //     password: req.body.password,
-    // }
+const mobile = require('../constants/electronicsProduct/mobileProduct.js')
+const television = require('../constants/electronicsProduct/televisionProduct.js')
+const watches = require('../constants/electronicsProduct/watchesProduct.js')
+const burger1 = require('../constants/foodProduct/burgerProduct.js')
+const pizza1 = require('../constants/foodProduct/pizzaProduct.js')
 
+const allProducts = {
+    "laptop": laptop,
+    "mobile": mobile,
+    "television": television,
+    "watches": watches,
+    "burger1": burger1,
+    "pizza1": pizza1,
+}
+
+const ondc = () => {
+
+}
+
+const searchByProduct = async (req, res) => {
     const data = req.params.product;
 
-   
-    res.send(laptop)
-    // try {
-    //     let data = await User.create(info)
-    //     // res.status(200).json(data);
-    //     if(data){
-    //         let payload = { subject: data.id }
-    //         const token = jwt.sign(payload, process.env.JWT_SECRET)
-    
-    //         res.status(200).json({ token })
-    //     }
-    // }
-    // catch (e) {
-    //     console.log(e);
-    //     e.errors.forEach((error) => {
-    //         console.log(error.message);
-    //         if (error.message == 'email must be unique') {
-    //             res.status(403).json({
-    //                 msg: "email already exist"
-    //             })
-    //         }
-    //     });
-    // }
+    const getProducts = () => {
+
+        var result = ondc(data)
+
+        Object.keys(allProducts).map(key => {
+            if (key.toLowerCase().includes(data.toLowerCase())) {
+                result = key
+            }
+        });
+
+        return allProducts[result]
+    }
+
+    res.send(getProducts())
+
 }
+
+
+
+
+
 const searchByCategory = async (req, res) => {
     const data = req.body;
     console.log(data);

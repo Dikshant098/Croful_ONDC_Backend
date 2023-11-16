@@ -40101,3 +40101,5 @@ const pizza4 = {
         "count": 20
     }
 }
+
+module.exports = pizza1

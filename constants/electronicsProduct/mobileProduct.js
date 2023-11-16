@@ -5352,3 +5352,5 @@ const mobile = {
         "total": 1264
     }
 }
+
+module.exports = mobile
