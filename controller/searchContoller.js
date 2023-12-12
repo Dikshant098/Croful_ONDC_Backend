@@ -14,16 +14,16 @@ const allProducts = {
     "pizza1": pizza1,
 }
 
-const ondc = () => {
-    
-}
+// const ondc = () => {
+
+// }
 
 const searchByProduct = async (req, res) => {
     const data = req.params.product;
 
     const getProducts = () => {
 
-        var result = ondc(data)
+        var result
 
         Object.keys(allProducts).map(key => {
             if (key.toLowerCase().includes(data.toLowerCase())) {
@@ -39,6 +39,20 @@ const searchByProduct = async (req, res) => {
 }
 
 
+const getProductDetailsById = async (req, res) => {
+    const id = req.params.id
+    let result = {}
+    Object.keys(allProducts).map(key => {
+        allProducts[key].data.map(m => {
+            if (m._id == id) {
+                console.log(m);
+                result = m
+                return
+            }
+        })
+    });
+    res.send(result)
+}
 
 
 
@@ -49,5 +63,6 @@ const searchByCategory = async (req, res) => {
 
 module.exports = {
     searchByProduct,
-    searchByCategory
+    searchByCategory,
+    getProductDetailsById
 }
