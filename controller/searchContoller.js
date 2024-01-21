@@ -28,12 +28,12 @@ const ondc = async (latitude, longitude, categories) => {
 }
 
 const searchCategory = async (categories) => {
-    console.log(categories);
+    //console.log(categories);
     const url = `https://www.mystore.in/api/1/entity/ms.products?fields[name]=1&fields[price]=1&fields[sku]=1&fields[images]=1&fields[alias]=1&fields[metafields]=1&fields[discounts]=1&fields[catalog_only]=1&fields[is_catalog]=1&fields[seller]=1&fields[available]=1&fields[compare_price]=1&fields[]=1&fields[seller_details]=1&fields[location_availability_mode]=1&fields[food_type]=1&fields[seller_collections]=1&filters[0][field]=categories&filters[0][value][0]=${categories}&filters[0][operator]=in&filters[1][field]=location_availability&filters[1][operator]=in&filters[1][value][0]=122001&filters[1][value][1]=std:124&filters[1][value][2]=all&facetgroup=default_category_facet&limit=24&total=1&start=0&new_search=1&latitude=28.4594842&longitude=77.0199782&location_check=1`
 
     try {
         const { data } = await axios.get(url)
-        console.log(data);
+        //console.log(data);
         return data;
     } catch (error) {
         return error
