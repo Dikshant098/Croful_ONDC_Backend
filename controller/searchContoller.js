@@ -60,18 +60,19 @@ const searchList = async (req, res) => {
 }
 
 
-const getProductDetailsById = async (req, res) => {
-    const id = req.params.id
-    let result = {}
-    Object.keys(allProducts).map(key => {
-        allProducts[key].data.map(m => {
-            if (m._id == id) {
-                console.log(m);
-                result = m
-                return
-            }
-        })
-    });
+const getProductDetails = async (req, res) => {
+    const prod = req.params.productName
+    const url = `https://www.mystore.in/api/1/entity/ms.products?q=%7B%22alias%22:%22${prod}%22%7D&limit=1`
+
+    try {
+        const { data } = await axios.get(url)
+        console.log(data);
+    } catch (error) {
+        return error
+    }
+
+
+
     res.send(result)
 }
 
@@ -96,6 +97,6 @@ const searchByCategory = async (req, res) => {
 module.exports = {
     searchByProduct,
     searchByCategory,
-    getProductDetailsById,
-    searchList
+    searchList,
+    getProductDetails
 }
