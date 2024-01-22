@@ -66,14 +66,16 @@ const getProductDetails = async (req, res) => {
 
     try {
         const { data } = await axios.get(url)
-        console.log(data);
+        res.send(data)
+        // console.log(data);
     } catch (error) {
-        return error
+        res.send(error)
+        // return error
     }
 
 
 
-    res.send(result)
+    // res.send(result)
 }
 
 
