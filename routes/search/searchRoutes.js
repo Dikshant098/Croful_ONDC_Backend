@@ -5,5 +5,6 @@ router.get('/searchByProduct/:product', searchController.searchByProduct)
 router.get('/searchByCategory/:category', searchController.searchByCategory)
 router.get('/searchList/:search', searchController.searchList)
 router.get('/getProductDetails/:productName', searchController.getProductDetails)
+router.get('/getProductDetailsById/:id', searchController.getProductDetailsById)
 
 module.exports = router

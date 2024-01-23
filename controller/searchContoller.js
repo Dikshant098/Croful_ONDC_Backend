@@ -52,11 +52,10 @@ const searchList = async (req, res) => {
         const searchUrl = `https://www.mystore.in/api/1/entity/ms.sellers?search=${search}&search_fuzzy=1&search_score_log=1&limit=20&latitude=28.4594842&longitude=77.0199782&new_search=1&hyperlocal=1&filters[0][field]=available_published_product_count&filters[0][operator]=greater_than&filters[0][value]=0`
         const response = await axios.get(searchUrl);
         res.send(response.data.data)
-        
+
     } catch (error) {
         res.send(error)
     }
-
 }
 
 
@@ -90,7 +89,20 @@ const searchByCategory = async (req, res) => {
     try {
         const resp = await searchCategory(params.category);
         res.send(resp);
-        
+
+    } catch (error) {
+        res.send(error)
+    }
+}
+
+const getProductDetailsById = async (req, res) => {
+    const id = req.params.id
+    const url = `https://www.mystore.in/api/1/entity/ms.products?fields[name]=1&fields[price]=1&fields[sku]=1&fields[images]=1&fields[alias]=1&fields[metafields]=1&fields[discounts]=1&fields[catalog_only]=1&fields[is_catalog]=1&fields[seller]=1&fields[available]=1&fields[compare_price]=1&fields[]=1&fields[seller_details]=1&fields[location_availability_mode]=1&fields[food_type]=1&fields[seller_collections]=1&fields[is_master_catalog]=1&fields[lp_count]=1&filters[0][field]=seller_substore_ids&filters[0][value]=${id}& facetgroup=default_category_facet & limit=50 & total=1 & start=0 & override_linked_products=1 & new_search=1`
+
+    try {
+        const { data } = await axios.get(url);
+        res.send(data);
+
     } catch (error) {
         res.send(error)
     }
@@ -100,5 +112,6 @@ module.exports = {
     searchByProduct,
     searchByCategory,
     searchList,
-    getProductDetails
+    getProductDetails,
+    getProductDetailsById
 }
