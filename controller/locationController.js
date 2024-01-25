@@ -6,7 +6,7 @@ const getLocation = async (req, res) => {
         // Replace 'YOUR_API_KEY' with your actual API key from OpenCage
         const apiKey = '11ee01b6e6e34c719bb71e3c53a8bc86';
         const response = await fetch(
-            `https://api.opencagedata.com/geocode/v1/json?q=21.2111177%2C79.1973445&key=11ee01b6e6e34c719bb71e3c53a8bc86`
+            `https://api.opencagedata.com/geocode/v1/json?q=21.165277467171137%2C79.08083902210203&key=11ee01b6e6e34c719bb71e3c53a8bc86`
         );
         if (!response.ok) {
             throw new Error('Failed to fetch location data');

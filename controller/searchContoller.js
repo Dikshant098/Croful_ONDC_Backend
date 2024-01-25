@@ -49,7 +49,7 @@ const searchByProduct = async (req, res) => {
 const searchList = async (req, res) => {
     const search = req.params.search
     try {
-        const searchUrl = `https://www.mystore.in/api/1/entity/ms.sellers?search=${search}&search_fuzzy=1&search_score_log=1&limit=20&latitude=28.4594842&longitude=77.0199782&new_search=1&hyperlocal=1&filters[0][field]=available_published_product_count&filters[0][operator]=greater_than&filters[0][value]=0`
+        const searchUrl = `https://www.mystore.in/api/1/entity/ms.sellers?search=${search}&search_fuzzy=1&search_score_log=1&limit=20&latitude=21.165243336667643&longitude=79.08092733981798&new_search=1&hyperlocal=1&filters[0][field]=available_published_product_count&filters[0][operator]=greater_than&filters[0][value]=0`
         const response = await axios.get(searchUrl);
         res.send(response.data.data)
 
