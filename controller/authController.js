@@ -1,39 +1,56 @@
-// const User = require("../models/auth.js");
+const User = require("../models/User");
 // const bcrypt = require('bcrypt')
 require('dotenv').config()
 
-const user = async (req, res) => {
+const createUser = async (req, res) => {
 
     // let password = await bcrypt.hash(req.body.password, bcrypt.genSaltSync(8));
 
-    let createUser = {
-        // username: req.body.username,
-        phone: req.body.phone,
-        password: password,
-        // phone: req.body.phone
-    }
+    // let createUser = {
+    //     // username: req.body.username,
+    //     phone: req.body.phone,
+    //     password: password,
+    //     // phone: req.body.phone
+    // }
 
     // console.log(req.body);
-    const findUsername = await User.findOne({ username: req.body.username })
-    if (!findUsername) {
-        const findEmail = await User.findOne({ email: req.body.email })
-        if (!findEmail) {
-            const data = await User.create(createUser);
-            res.status(200).json(data);
-            return
-        } else {
-            res.send({
-                msg: "Email already exist"
-            })
-            return
-        }
+    // const findUsername = await User.findOne({ username: req.body.username })
+    // if (!findUsername) {
+    //     const findEmail = await User.findOne({ email: req.body.email })
+    //     if (!findEmail) {
+    //         const data = await User.create(createUser);
+    //         res.status(200).json(data);
+    //         return
+    //     } else {
+    //         res.send({
+    //             msg: "Email already exist"
+    //         })
+    //         return
+    //     }
+    // }
+    // else {
+    //     res.send({
+    //         msg: "username already exist"
+    //     })
+    //     return
+    // }
+
+    let obj = {
+        mobile: req.body.mobile,
     }
-    else {
-        res.send({
-            msg: "username already exist"
-        })
-        return
+
+
+
+    // console.log(obj);
+    try {
+        const user = await User.findOne()
+        const data = await User.create(obj);
+        res.send(data)
+
+    } catch (error) {
+        console.log(data);
     }
+
 }
 
 const generateRandomOTP = () => {
@@ -50,17 +67,19 @@ const client = require('twilio')(accountSid, authToken);
 var sendOTP = 0;
 const userLogin = async (req, res) => {
     const { mobile } = req.body
+    console.log(mobile);
     sendOTP = generateRandomOTP()
 
     try {
         const message = await client.messages
             .create({
-                body: `This is test msg your OTP is ${sendOTP}`,
+                body: `Your is Test msg for OTP. Your OTP is ${sendOTP}`,
                 from: process.env.TWILIO_PHONE_NO,
                 to: `+91${mobile}`
             })
 
         if (message) {
+            console.log(message);
             res.send({
                 success: true,
                 message: "Otp successfully send to user",
@@ -68,15 +87,16 @@ const userLogin = async (req, res) => {
         }
 
     } catch (error) {
-        console.log(error);
+        res.send(error)
     }
 }
 
 
 const verifyUser = async (req, res) => {
     const { userOTP } = req.body
-    if (sendOTP === userOTP) {
+    if (sendOTP === parseInt(userOTP)) {
         res.status(200).json({
+            success: true,
             message: "User login successfully done !!"
         })
         sendOTP = null
@@ -108,10 +128,10 @@ const getAllUserDetails = async (req, res) => {
 
 
 module.exports = {
-    user,
     getUserDetailsById,
     getAllUserDetails,
     userLogin,
-    verifyUser
+    verifyUser,
+    createUser
 }
 

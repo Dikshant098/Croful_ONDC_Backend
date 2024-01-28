@@ -4,6 +4,7 @@ const port = 2023;
 const cors = require('cors');
 
 app.use(cors("*"))
+require('./models/index.js')
 
 app.listen(port, () => {
     console.log(`server is running on http://localhost:${port}`);

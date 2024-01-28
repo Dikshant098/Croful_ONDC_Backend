@@ -95,7 +95,7 @@ const searchByCategory = async (req, res) => {
     }
 }
 
-const getProductDetailsById = async (req, res) => {
+const getSellerProductDetailsById = async (req, res) => {
     const id = req.params.id
     const url = `https://www.mystore.in/api/1/entity/ms.products?fields[name]=1&fields[price]=1&fields[sku]=1&fields[images]=1&fields[alias]=1&fields[metafields]=1&fields[discounts]=1&fields[catalog_only]=1&fields[is_catalog]=1&fields[seller]=1&fields[available]=1&fields[compare_price]=1&fields[]=1&fields[seller_details]=1&fields[location_availability_mode]=1&fields[food_type]=1&fields[seller_collections]=1&fields[is_master_catalog]=1&fields[lp_count]=1&filters[0][field]=seller_substore_ids&filters[0][value]=${id}& facetgroup=default_category_facet & limit=50 & total=1 & start=0 & override_linked_products=1 & new_search=1`
 
@@ -108,10 +108,25 @@ const getProductDetailsById = async (req, res) => {
     }
 }
 
+const getProductDetailsAlias = async (req, res) => {
+    const alias = req.params.alias
+    const url = `https://www.mystore.in/api/1/entity/ms.products?q=%7B%22alias%22:%22${alias}%22%7D&limit=1`
+
+    try {
+        const { data } = await axios.get(url)
+        res.send(data)
+        console.log(data);
+    } catch (error) {
+        res.send(error)
+        // return error
+    }
+}
+
 module.exports = {
     searchByProduct,
     searchByCategory,
     searchList,
     getProductDetails,
-    getProductDetailsById
+    getSellerProductDetailsById,
+    getProductDetailsAlias
 }
