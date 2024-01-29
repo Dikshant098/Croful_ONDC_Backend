@@ -2,7 +2,7 @@ const axios = require('axios')
 
 const getLocation = async (req, res) => {
     const { latitude, longitude } = req.body
-    console.log(latitude, longitude);
+    // console.log(latitude, longitude);
     try {
         // Replace 'YOUR_API_KEY' with your actual API key from OpenCage
         // const apiKey = 'pk.e4e118b80d0c2e10e968cd0c79316d38';

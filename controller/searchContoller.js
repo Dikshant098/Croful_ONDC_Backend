@@ -70,9 +70,6 @@ const getProductDetails = async (req, res) => {
         res.send(error)
         // return error
     }
-
-
-
     // res.send(result)
 }
 

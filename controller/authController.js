@@ -75,9 +75,7 @@ const userLogin = async (req, res) => {
                 from: process.env.TWILIO_PHONE_NO,
                 to: `+91${mobile}`
             })
-        console.log('message=>>>>>>>>>',message);
         if (message) {
-            console.log(message);
             res.send({
                 success: true,
                 message: "Otp successfully send to user",
@@ -86,7 +84,7 @@ const userLogin = async (req, res) => {
 
     } catch (error) {
         res.send(error)
-        console.log('error==============',error);
+        // console.log('error==============', error);
     }
 }
 
