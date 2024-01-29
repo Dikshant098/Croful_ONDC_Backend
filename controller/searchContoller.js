@@ -28,7 +28,7 @@ const ondc = async (latitude, longitude, categories) => {
 }
 
 const searchCategory = async (categories) => {
-    const url = `https://www.mystore.in/api/1/entity/ms.products?fields[name]=1&fields[price]=1&fields[sku]=1&fields[images]=1&fields[alias]=1&fields[metafields]=1&fields[discounts]=1&fields[catalog_only]=1&fields[is_catalog]=1&fields[seller]=1&fields[available]=1&fields[compare_price]=1&fields[]=1&fields[seller_details]=1&fields[location_availability_mode]=1&fields[food_type]=1&fields[seller_collections]=1&filters[0][field]=categories&filters[0][value][0]=${categories}&filters[0][operator]=in&filters[1][field]=location_availability&filters[1][operator]=in&filters[1][value][0]=122001&filters[1][value][1]=std:124&filters[1][value][2]=all&facetgroup=default_category_facet&limit=24&total=1&start=0&new_search=1&latitude=28.4594842&longitude=77.0199782&location_check=1`
+    const url = `https://www.mystore.in/api/1/entity/ms.products?fields[name]=1&fields[price]=1&fields[sku]=1&fields[images]=1&fields[alias]=1&fields[metafields]=1&fields[discounts]=1&fields[catalog_only]=1&fields[is_catalog]=1&fields[seller]=1&fields[available]=1&fields[compare_price]=1&fields[]=1&fields[seller_details]=1&fields[location_availability_mode]=1&fields[food_type]=1&fields[seller_collections]=1&filters[0][field]=categories&filters[0][value][0]=${categories}&filters[0][operator]=in&filters[1][field]=location_availability&filters[1][operator]=in&filters[1][value][0]=122001&filters[1][value][1]=std:124&filters[1][value][2]=all&facetgroup=default_category_facet&limit=24&total=1&start=0&new_search=1&latitude=${21.364774240243623}&longitude=${79.12123326018552}&location_check=1`
 
     try {
         const { data } = await axios.get(url)
@@ -49,7 +49,7 @@ const searchByProduct = async (req, res) => {
 const searchList = async (req, res) => {
     const search = req.params.search
     try {
-        const searchUrl = `https://www.mystore.in/api/1/entity/ms.sellers?search=${search}&search_fuzzy=1&search_score_log=1&limit=20&latitude=21.165243336667643&longitude=79.08092733981798&new_search=1&hyperlocal=1&filters[0][field]=available_published_product_count&filters[0][operator]=greater_than&filters[0][value]=0`
+        const searchUrl = `https://www.mystore.in/api/1/entity/ms.sellers?search=${search}&search_fuzzy=1&search_score_log=1&limit=20&latitude=${21.364774240243623}&longitude=${79.12123326018552}&new_search=1&hyperlocal=1&filters[0][field]=available_published_product_count&filters[0][operator]=greater_than&filters[0][value]=0`
         const response = await axios.get(searchUrl);
         res.send(response.data.data)
 
