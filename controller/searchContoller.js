@@ -43,7 +43,6 @@ const searchByProduct = async (req, res) => {
     const data = req.params.product;
     const resp = await ondc();
     res.send(resp)
-
 }
 
 const searchList = async (req, res) => {
