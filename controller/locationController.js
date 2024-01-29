@@ -1,5 +1,7 @@
 const axios = require('axios')
 
+
+
 const getLocation = async (req, res) => {
     const { latitude, longitude } = req.body
     // console.log(latitude, longitude);

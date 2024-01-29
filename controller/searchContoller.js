@@ -111,7 +111,7 @@ const getProductDetailsAlias = async (req, res) => {
     try {
         const { data } = await axios.get(url)
         res.send(data)
-        console.log(data);
+        // console.log(data);
     } catch (error) {
         res.send(error)
         // return error

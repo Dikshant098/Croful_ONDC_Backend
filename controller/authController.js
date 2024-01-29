@@ -63,9 +63,12 @@ const accountSid = process.env.TWILIO_ACCOUNT_SID;
 const authToken = process.env.TWILIO_AUTH_TOKEN;
 const client = require('twilio')(accountSid, authToken);
 var sendOTP = 0;
+var resp = null
+var phone = null
 const userLogin = async (req, res) => {
     const { mobile } = req.body
-    console.log(mobile);
+    phone = mobile
+    // console.log(mobile);
     sendOTP = generateRandomOTP()
 
     try {
@@ -84,19 +87,37 @@ const userLogin = async (req, res) => {
 
     } catch (error) {
         res.send(error)
-        // console.log('error==============', error);
     }
 }
 
 
 const verifyUser = async (req, res) => {
     const { userOTP } = req.body
+
     if (sendOTP === parseInt(userOTP)) {
-        res.status(200).json({
-            success: true,
-            message: "User login successfully done !!"
-        })
-        sendOTP = null
+        resp = await User.findOne({ mobile: phone })
+        if (resp) {
+            console.log(resp);
+            console.log("Already exist----------------------------------------------------->");
+            res.status(200).json({
+                _id: resp._id,
+                success: true,
+                message: "User login successfully done !!"
+            })
+            sendOTP = null
+        } else {
+            resp = await User.create({ mobile: phone })
+            console.log("not notttyytytytyytytytyytytytyytuuuuuuuuuuuuuuuuuuuu");
+            res.status(200).json({
+                _id: resp._id,
+                success: true,
+                message: "User login successfully done !!"
+            })
+            sendOTP = null
+        }
+        resp = null
+        phone = null
+
     }
     else {
         res.status(403).json({
@@ -122,6 +143,11 @@ const getAllUserDetails = async (req, res) => {
     res.status(200).json(data);
 }
 
+const findUserById = async (req, res) => {
+    const data = await User.find({ })
+    res.status(200).json(data);
+}
+
 
 
 module.exports = {
@@ -129,6 +155,7 @@ module.exports = {
     getAllUserDetails,
     userLogin,
     verifyUser,
-    createUser
+    createUser,
+    findUserById
 }
 

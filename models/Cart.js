@@ -9,6 +9,11 @@ const cartSchema = new mongoose.Schema({
     },
     quantity: {
         type: Number
+    },
+    userId: {
+        type: mongoose.Schema.Types.ObjectId,
+        require: false,
+        ref: 'User'
     }
 })
 
