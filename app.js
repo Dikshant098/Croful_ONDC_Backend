@@ -13,5 +13,5 @@ app.listen(port, () => {
 app.use(express.urlencoded({ extended: true }))
 app.use(express.json())
 
-const apiRoutes = require('./routes/routes.js')
+const apiRoutes = require('./routes/routes.js') 
 app.use('/api', apiRoutes)
