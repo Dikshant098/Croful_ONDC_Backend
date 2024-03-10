@@ -37,10 +37,10 @@ const getCartDetails = async (req, res) => {
     // console.log(obj);
     try {
         const data = await Cart.find(obj);
-        console.log(data);
+        // console.log(data);
         res.send(data)
     } catch (error) {
-        console.log(data);
+        // console.log(data);
     }
 
 }
@@ -56,7 +56,7 @@ const deleteCartDetails = async (req, res) => {
     // console.log(obj);
     try {
         const data = await Cart.deleteOne(obj);
-        console.log(data);
+        // console.log(data);
         res.send(data)
     } catch (error) {
         console.log(data);
@@ -77,10 +77,10 @@ const updateCartDetails = async (req, res) => {
     // console.log(obj);
     try {
         const data = await Cart.updateOne({_id: req.prams._id},obj);
-        console.log(data);
+        // console.log(data);
         res.send(data)
     } catch (error) {
-        console.log(data);
+        // console.log(data);
     }
 
 }
