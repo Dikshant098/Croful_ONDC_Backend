@@ -45,7 +45,6 @@ const getCartDetails = async (req, res) => {
 
 }
 const deleteCartDetails = async (req, res) => {
-
     let obj = {
         // productName: req.body.productName,
         // price: req.body.price,
@@ -59,12 +58,11 @@ const deleteCartDetails = async (req, res) => {
         console.log(data);
         res.send(data)
     } catch (error) {
-        console.log(data);
+        console.log(error);
     }
 
 }
 const updateCartDetails = async (req, res) => {
-
     let obj = {
         productName: req.body.productName,
         price: req.body.price,
@@ -73,14 +71,12 @@ const updateCartDetails = async (req, res) => {
     }
 
     
-
-    // console.log(obj);
     try {
-        const data = await Cart.updateOne({_id: req.prams._id},obj);
+        const {data} = await Cart.updateOne({_id: req.params._id},obj);
         console.log(data);
         res.send(data)
     } catch (error) {
-        console.log(data);
+        console.log(error);
     }
 
 }
