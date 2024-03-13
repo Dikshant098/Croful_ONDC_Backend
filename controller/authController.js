@@ -94,37 +94,45 @@ const userLogin = async (req, res) => {
 const verifyUser = async (req, res) => {
     const { userOTP } = req.body
 
-    if (sendOTP === parseInt(userOTP)) {
-        resp = await User.findOne({ mobile: phone })
-        if (resp) {
-            console.log(resp);
-            console.log("Already exist----------------------------------------------------->");
-            res.status(200).json({
-                _id: resp._id,
-                success: true,
-                message: "User login successfully done !!"
-            })
-            sendOTP = null
-        } else {
-            resp = await User.create({ mobile: phone })
-            console.log("not notttyytytytyytytytyytytytyytuuuuuuuuuuuuuuuuuuuu");
-            res.status(200).json({
-                _id: resp._id,
-                success: true,
-                message: "User login successfully done !!"
-            })
-            sendOTP = null
+    try {
+        if (sendOTP === parseInt(userOTP)) {
+            resp = await User.findOne({ mobile: phone })
+            if (resp) {
+                console.log(resp);
+                console.log("Already exist----------------------------------------------------->");
+                res.status(200).json({
+                    _id: resp._id,
+                    success: true,
+                    message: "User login successfully done !!"
+                })
+                sendOTP = null
+            } else {
+                resp = await User.create({ mobile: phone })
+                console.log("not notttyytytytyytytytyytytytyytuuuuuuuuuuuuuuuuuuuu");
+                res.status(200).json({
+                    _id: resp._id,
+                    success: true,
+                    message: "User login successfully done !!"
+                })
+                sendOTP = null
+            }
+            resp = null
+            phone = null
+
         }
-        resp = null
-        phone = null
+        else {
+            res.status(403).json({
+                success: false,
+                message: "Invalid Otp. Please resend your Otp to validate."
+            })
+        }
+
+    } catch (error) {
+        console.log(error);
 
     }
-    else {
-        res.status(403).json({
-            success: false,
-            message: "Invalid Otp. Please resend your Otp to validate."
-        })
-    }
+
+
 
 }
 
@@ -139,13 +147,40 @@ const getUserDetailsById = async (req, res) => {
 }
 
 const getAllUserDetails = async (req, res) => {
-    const data = await User.find({})
-    res.status(200).json(data);
+    try {
+        const data = await User.find({})
+        res.status(200).json(data);
+    } catch (error) {
+        console.log(error);
+
+    }
+
 }
 
 const findUserById = async (req, res) => {
-    const data = await User.find({ })
-    res.status(200).json(data);
+    try {
+        const data = await User.find({
+            _id: req.params._id
+        })
+        res.status(200).json(data);
+    } catch (error) {
+        console.log(error);
+
+    }
+
+}
+
+
+const updateUserById = async (req, res) => {
+    // console.log(req.body, "<----------req.body");
+    try {
+        const data  = await User.updateOne({ _id: req.params._id }, req.body)
+        console.log(data);
+        res.status(200).json(data);
+
+    } catch (error) {
+        console.log(error);
+    }
 }
 
 
@@ -156,6 +191,7 @@ module.exports = {
     userLogin,
     verifyUser,
     createUser,
-    findUserById
+    findUserById,
+    updateUserById
 }
 
