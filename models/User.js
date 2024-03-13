@@ -4,10 +4,17 @@ const userSchema = new mongoose.Schema({
     mobile: {
         type: Number
     },
-    cart:{
+    cart: {
         type: mongoose.Schema.Types.ObjectId,
         ref: 'Cart'
+    },
+    firstName: {
+        type: String
+    },
+    lastName: {
+        type: String
     }
+
 })
 
 const User = mongoose.model('User', userSchema)
