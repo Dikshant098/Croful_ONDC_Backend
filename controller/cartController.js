@@ -10,7 +10,8 @@ const addtoCart = async (req, res) => {
         quantity: req.body.quantity,
         userId: req.body.userId,
         img: req.body.img,
-        cId: req.body.cId
+        cId: req.body.cId,
+        sellerName: req.body.sellerName
     }
 
     // console.log(obj);
