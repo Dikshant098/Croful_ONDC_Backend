@@ -52,11 +52,14 @@ const createUser = async (req, res) => {
 }
 
 const generateRandomOTP = () => {
-    const min = 1000
-    const max = 9999
-    let rand = Math.random()
-    rand = Math.floor(rand * max - min)
-    return rand;
+    // const min = 1000
+    // const max = 9999
+    // let rand = Math.random()
+    // rand = Math.floor(rand * max - min)
+    let otp = "";
+    for(let i=0; i<4; i++){
+        otp += Math.floor(Math.random()*10).toString()    }
+    return otp;
 }
 
 const accountSid = process.env.TWILIO_ACCOUNT_SID;
@@ -95,7 +98,7 @@ const verifyUser = async (req, res) => {
     const { userOTP } = req.body
 
     try {
-        if (sendOTP === parseInt(userOTP)) {
+        if (sendOTP === (userOTP)) {
             resp = await User.findOne({ mobile: phone })
             if (resp) {
                 console.log(resp);
@@ -108,7 +111,7 @@ const verifyUser = async (req, res) => {
                 sendOTP = null
             } else {
                 resp = await User.create({ mobile: phone })
-                console.log("not notttyytytytyytytytyytytytyytuuuuuuuuuuuuuuuuuuuu");
+                // console.log("not notttyytytytyytytytyytytytyytuuuuuuuuuuuuuuuuuuuu");
                 res.status(200).json({
                     _id: resp._id,
                     success: true,
